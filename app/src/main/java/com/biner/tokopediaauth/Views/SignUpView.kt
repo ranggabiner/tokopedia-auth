@@ -2,21 +2,18 @@ package com.biner.tokopediaauth
 
 import TokopediaTheme
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.Arrangement.spacedBy
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 @Composable
-fun SignInView(email: String, password: String) {
+fun SignUpView(email: String, password: String) {
     TokopediaTheme {
         Column(
             modifier = Modifier
@@ -29,7 +26,7 @@ fun SignInView(email: String, password: String) {
             Column(
                 verticalArrangement = spacedBy(20.dp)
             ) {
-                Header(text = "Masuk dengan Alamat E-mail" )
+                Header(text = "Daftar dengan E-mail")
                 Column(
                     verticalArrangement = spacedBy(17.dp)
                 ) {
@@ -40,23 +37,23 @@ fun SignInView(email: String, password: String) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = spacedBy(12.dp),
                 ) {
-                    ButtonCustom(label = "Masuk") {
-                        println("logged")
+                    ButtonCustom(label = "Lanjut") {
+                        println("Navigated to next step")
                     }
                     TextNote()
                 }
             }
-            Footer(question = "Belum punya akun? ", action = "Daftar Sekarang", onClick = {
+            Footer(question = "Sudah punya akun? ", action = "Masuk", onClick = {
                 println("Navigating to Sign Up")
             })
         }
     }
 }
 
-@Preview(
+@Preview (
     showSystemUi = true,
 )
 @Composable
-fun SignInViewPreview() {
-    SignInView("2310501014@mahasiswa.ac.id", "password123")
+fun SignUpViewPreview() {
+    SignUpView("2310501014@mahasiswa.upnvj.ac.id", "password123")
 }

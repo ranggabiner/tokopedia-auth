@@ -9,20 +9,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-fun Footer() {
+fun Footer(question: String, action: String, onClick: () -> Unit) {
     Row {
         Text(
-            "Belum punya akun? ",
+            question,
             style = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center,
         )
         Text(
-            "Daftar Sekarang",
+            action,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.primary,
             textAlign = TextAlign.Center,
             modifier = Modifier.clickable {
-                println("Register clicked")
+                onClick
             }
         )
     }

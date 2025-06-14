@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.biner.tokopediaauth.Views.Components.NotAlreadyRegisteredDialog
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.padding(8.dp).fillMaxSize(),
                     color = Color.White
                 ) {
-                    SignInView("2310501014@mahasiswa.ac.id", "password123" )
+                    VerifyView(email = "2310501014@mhaasiswa.upvnvj.ac.id")
+//                    SignUpView("2310501014@mahasiswa.ac.id", "password123" )
                 }
             }
         }
