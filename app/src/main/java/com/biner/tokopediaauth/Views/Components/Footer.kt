@@ -1,4 +1,4 @@
-package com.biner.tokopediaauth
+package com.biner.tokopediaauth.Views.Components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row

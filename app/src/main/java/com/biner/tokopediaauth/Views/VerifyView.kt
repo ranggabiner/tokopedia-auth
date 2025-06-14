@@ -1,5 +1,6 @@
-package com.biner.tokopediaauth
+package com.biner.tokopediaauth.Views
 
+import TokopediaTheme
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.spacedBy
@@ -35,7 +36,6 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun VerifyView(email: String) {
     var code by remember { mutableStateOf("") }
-
     Column(
         modifier = Modifier
             .padding(vertical = 16.dp)
