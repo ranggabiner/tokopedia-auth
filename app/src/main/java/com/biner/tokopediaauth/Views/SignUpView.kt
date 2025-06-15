@@ -21,15 +21,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.biner.tokopediaauth.ViewModels.SignUpViewModel
 import com.biner.tokopediaauth.Views.Components.BackButton
 import com.biner.tokopediaauth.Views.Components.Header
 import com.biner.tokopediaauth.Views.Components.TextFieldCustom
 import com.biner.tokopediaauth.Views.Components.ButtonCustom
 import com.biner.tokopediaauth.Views.Components.TextNote
 import com.biner.tokopediaauth.Views.Components.Footer
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun SignUpView(email: String, password: String, navController: NavController) {
+fun SignUpView(viewModel: SignUpViewModel = viewModel(), navController: NavController) {
+    val email = viewModel.email
+    val password = viewModel.password
+    val message = viewModel.message
+    val isLoading = viewModel.isLoading
+
     TokopediaTheme {
         Column(
             modifier = Modifier
@@ -47,14 +54,15 @@ fun SignUpView(email: String, password: String, navController: NavController) {
                 Column(
                     verticalArrangement = spacedBy(17.dp)
                 ) {
-                    TextFieldCustom(label = "E-mail", password = false, value = "")
-                    TextFieldCustom(label = "Kata Sandi", password = true, value = "")
+                    TextFieldCustom(label = "E-mail", password = false, value = email, onValueChange = { viewModel.email = it })
+                    TextFieldCustom(label = "Kata Sandi", password = true, value = password, onValueChange = { viewModel.password = it })
                 }
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = spacedBy(12.dp),
                 ) {
-                    ButtonCustom(label = "Lanjut", color = MaterialTheme.colorScheme.primary) {
+                    ButtonCustom(if (isLoading) "Loading..." else "Lanjut", color = MaterialTheme.colorScheme.primary) {
+                        viewModel.signUp()
                         navController.navigate("VerifyView")
                     }
                     TextNote()
@@ -72,5 +80,5 @@ fun SignUpView(email: String, password: String, navController: NavController) {
 )
 @Composable
 fun SignUpViewPreview() {
-    SignUpView("2310501014@mahasiswa.upnvj.ac.id", "password123", navController = rememberNavController())
+    SignUpView(viewModel = TODO(), navController = rememberNavController())
 }

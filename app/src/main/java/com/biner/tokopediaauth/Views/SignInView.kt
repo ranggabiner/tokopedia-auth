@@ -39,8 +39,8 @@ fun SignInView(email: String, password: String, navController: NavController, se
                 Column(
                     verticalArrangement = spacedBy(17.dp)
                 ) {
-                    TextFieldCustom(label = "E-mail", password = false, value = "")
-                    TextFieldCustom(label = "Kata Sandi", password = true, value = "")
+//                    TextFieldCustom(label = "E-mail", password = false, value = email, onValueChange = { viewModel.password = it })
+//                    TextFieldCustom(label = "Kata Sandi", password = true, value = password)
                 }
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,

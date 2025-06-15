@@ -19,13 +19,12 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TextFieldCustom(label: String, password: Boolean, value: String) {
-    val state = remember { mutableStateOf(value) }
+fun TextFieldCustom(label: String, password: Boolean, value: String, onValueChange: (String) -> Unit) {
     val passwordVisible = remember { mutableStateOf(false) }
 
     OutlinedTextField(
-        value = state.value,
-        onValueChange = { state.value = it },
+        value = value,
+        onValueChange = onValueChange,
         label = { Text(label) },
         placeholder = { Text(label) },
         modifier = Modifier

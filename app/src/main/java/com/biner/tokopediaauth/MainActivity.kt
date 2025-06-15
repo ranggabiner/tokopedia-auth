@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.biner.tokopediaauth.ViewModels.SignUpViewModel
 import com.biner.tokopediaauth.Views.HomeView
 import com.biner.tokopediaauth.Views.SignInView
 import com.biner.tokopediaauth.Views.SignUpView
@@ -45,7 +46,8 @@ class MainActivity : ComponentActivity() {
                             SignInView("2310501014@mahasiswa.ac.id", "password123", navController, sessionManager)
                         }
                         composable("SignUpView") {
-                            SignUpView("2310501014@mahasiswa.upnvj.ac.id", "password123", navController)
+                            val signUpViewModel = androidx.lifecycle.viewmodel.compose.viewModel<SignUpViewModel>()
+                            SignUpView(signUpViewModel, navController)
                         }
                         composable("VerifyView") {
                             VerifyView("2310501014@mahasiswa.upnvj.ac.id",  navController)

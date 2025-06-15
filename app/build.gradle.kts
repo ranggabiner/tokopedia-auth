@@ -1,9 +1,17 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     kotlin("plugin.serialization") version "2.1.21"
 }
+
+val properties = Properties()
+rootProject.file("local.properties").inputStream().use { stream ->
+    properties.load(stream)
+}
+val token = properties.getProperty("BEARER_TOKEN")
 
 android {
     namespace = "com.biner.tokopediaauth"
@@ -15,7 +23,6 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,6 +33,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BEARER_TOKEN", "\"Bearer $token\"")
+        }
+        debug {
+            buildConfigField("String", "BEARER_TOKEN", "\"Bearer $token\"")
         }
     }
     compileOptions {
@@ -37,6 +48,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 
@@ -63,4 +75,19 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
     implementation("androidx.navigation:navigation-compose:2.9.0")
+
+    // ✅ Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+// ✅ OkHttp (buat intercept header kayak Authorization Bearer)
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation("io.github.jan-tennert.supabase:gotrue-kt:1.3.2")
+    implementation("io.github.jan-tennert.supabase:supabase-kt:1.3.2")
+
+    implementation("io.ktor:ktor-client-android:2.3.7")
 }
