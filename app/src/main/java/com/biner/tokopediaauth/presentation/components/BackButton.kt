@@ -1,4 +1,4 @@
-package com.biner.tokopediaauth.Views.Components
+package com.biner.tokopediaauth.presentation.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons

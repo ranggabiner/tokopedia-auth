@@ -1,4 +1,4 @@
-package com.biner.tokopediaauth.data.remote.api
+package com.biner.tokopediaauth.data.api.request
 
 data class SignUpRequest(
     val email: String,

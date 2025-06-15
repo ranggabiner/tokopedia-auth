@@ -1,4 +1,4 @@
-package com.biner.tokopediaauth.Views.Components
+package com.biner.tokopediaauth.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package com.biner.tokopediaauth
+package com.biner.tokopediaauth.presentation
 
 import TokopediaTheme
 import android.os.Bundle
@@ -15,14 +15,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.biner.tokopediaauth.ViewModels.SignUpViewModel
-import com.biner.tokopediaauth.Views.HomeView
-import com.biner.tokopediaauth.Views.SignInView
-import com.biner.tokopediaauth.Views.SignUpView
-import com.biner.tokopediaauth.Views.VerifyView
+import com.biner.tokopediaauth.presentation.signin.SignInViewModel
+import com.biner.tokopediaauth.presentation.signup.SignUpViewModel
+import com.biner.tokopediaauth.presentation.verify.VerifyViewModel
+import com.biner.tokopediaauth.presentation.home.HomeView
+import com.biner.tokopediaauth.presentation.signin.SignInView
+import com.biner.tokopediaauth.presentation.signup.SignUpView
+import com.biner.tokopediaauth.presentation.verify.VerifyView
 import com.biner.tokopediaauth.utils.SessionManager
 
 class MainActivity : ComponentActivity() {
@@ -43,14 +46,17 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController = navController, startDestination = startDestination) {
                         composable("SignInView") {
-                            SignInView("2310501014@mahasiswa.ac.id", "password123", navController, sessionManager)
+                            val signInViewModel = viewModel<SignInViewModel>()
+                            SignInView(signInViewModel, navController, sessionManager)
                         }
                         composable("SignUpView") {
-                            val signUpViewModel = androidx.lifecycle.viewmodel.compose.viewModel<SignUpViewModel>()
+                            val signUpViewModel = viewModel<SignUpViewModel>()
                             SignUpView(signUpViewModel, navController)
                         }
-                        composable("VerifyView") {
-                            VerifyView("2310501014@mahasiswa.upnvj.ac.id",  navController)
+                        composable("VerifyView?email={email}") { backStackEntry ->
+                            val email = backStackEntry.arguments?.getString("email") ?: ""
+                            val verifyViewModel = viewModel<VerifyViewModel>(backStackEntry)
+                            VerifyView(email, navController, viewModel = verifyViewModel)
                         }
                         composable("HomeView") {
                             HomeView(navController, sessionManager)
