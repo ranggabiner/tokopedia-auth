@@ -15,9 +15,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.biner.tokopediaauth.utils.SessionManager
 
 @Composable
-fun HomeView() {
+fun HomeView(navController: NavController, sessionManager: SessionManager) {
         Column(
             modifier = Modifier
                 .padding(vertical = 16.dp)
@@ -51,7 +54,12 @@ fun HomeView() {
                     label = "Keluar",
                     color = MaterialTheme.colorScheme.error
                 )
-                { println("Logout") }
+                {
+                    sessionManager.logout()
+                    navController.navigate("SignInView") {
+                        popUpTo("HomeView") { inclusive = true }
+                    }
+                }
             }
         }
     }
@@ -61,6 +69,6 @@ fun HomeView() {
 )
 @Composable
 private fun HomeViewPreview() {
-    HomeView()
+    HomeView(navController = rememberNavController(), sessionManager = SessionManager(rememberNavController().context) )
 }
 

@@ -31,10 +31,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
+import com.biner.tokopediaauth.Views.Components.BackButton
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun VerifyView(email: String) {
+fun VerifyView(email: String, navController: NavController) {
     var code by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
@@ -43,72 +45,82 @@ fun VerifyView(email: String) {
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            verticalArrangement = spacedBy(7.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Email,
-                modifier = Modifier.size(30.dp),
-                tint = MaterialTheme.colorScheme.primary,
-                contentDescription = "Email Icon",
-            )
+        Column{
+            BackButton(navController)
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(
-                    "Masukkan Kode Verifikasi",
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    "Kode verifikasi telah dikirim melalui e-mail ke ${email}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-        Column(
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-            TextField(
-                value = code,
-                onValueChange = { input ->
-                    val filtered = input.filter { it.isDigit() }.take(6)
-                    code = filtered
-                },
-                modifier = Modifier.width(200.dp),
-                singleLine = true,
-                maxLines = 1,
-                isError = false,
-                textStyle = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold, textAlign =  TextAlign.Center),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    disabledContainerColor = Color.Transparent,
-                    focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                    unfocusedIndicatorColor = Color.Gray,
-                    disabledIndicatorColor = Color.LightGray
-                )
-            )
-            Row {
-                Text(
-                    "Tidak menerima kode? ",
-                    style = MaterialTheme.typography.titleMedium,
-                    textAlign = TextAlign.Center,
-                )
-                Text(
-                    "Kirim ulang",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.primary,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.clickable {
-                        println("Mengirim ulang kode verifikasi")
+                Column(
+                    verticalArrangement = spacedBy(7.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Email,
+                        modifier = Modifier.size(30.dp),
+                        tint = MaterialTheme.colorScheme.primary,
+                        contentDescription = "Email Icon",
+                    )
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            "Masukkan Kode Verifikasi",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        )
+                        Text(
+                            "Kode verifikasi telah dikirim melalui e-mail ke ${email}",
+                            style = MaterialTheme.typography.bodyMedium,
+                            textAlign = TextAlign.Center
+                        )
                     }
-                )
+                }
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    TextField(
+                        value = code,
+                        onValueChange = { input ->
+                            val filtered = input.filter { it.isDigit() }.take(6)
+                            code = filtered
+                        },
+                        modifier = Modifier.width(200.dp),
+                        singleLine = true,
+                        maxLines = 1,
+                        isError = false,
+                        textStyle = MaterialTheme.typography.displayMedium.copy(
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        ),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        colors = TextFieldDefaults.colors(
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            disabledContainerColor = Color.Transparent,
+                            focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+                            unfocusedIndicatorColor = Color.Gray,
+                            disabledIndicatorColor = Color.LightGray
+                        )
+                    )
+                    Row {
+                        Text(
+                            "Tidak menerima kode? ",
+                            style = MaterialTheme.typography.titleMedium,
+                            textAlign = TextAlign.Center,
+                        )
+                        Text(
+                            "Kirim ulang",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.primary,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.clickable {
+                                println("Mengirim ulang kode verifikasi")
+                            }
+                        )
+                    }
+                }
             }
         }
     }
@@ -119,5 +131,5 @@ fun VerifyView(email: String) {
 )
 @Composable
 fun VerifyViewPreview() {
-    VerifyView("2310501014@maasiswa.ac.id")
+    VerifyView("2310501014@maasiswa.ac.id", navController = rememberNavController())
 }

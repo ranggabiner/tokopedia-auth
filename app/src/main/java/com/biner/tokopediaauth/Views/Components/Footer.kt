@@ -22,7 +22,7 @@ fun Footer(question: String, action: String, onClick: () -> Unit) {
             color = MaterialTheme.colorScheme.primary,
             textAlign = TextAlign.Center,
             modifier = Modifier.clickable {
-                onClick
+                onClick()
             }
         )
     }
